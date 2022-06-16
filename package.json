@@ -1,0 +1,19 @@
+{
+  "name": "flyff-u-buffer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^19.0.4",
+    "node-key-sender": "^1.0.11"
+  },
+  "dependencies": {
+    "puppeteer": "^14.4.0"
+  }
+}
