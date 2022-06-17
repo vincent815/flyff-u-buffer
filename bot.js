@@ -6,6 +6,7 @@ module.exports = class Browser {
     page
     cooldown
     countdown
+    countGap = 2000
     constructor(website, min, max) {
         this.website = website;
         this.min = min;
@@ -22,20 +23,25 @@ module.exports = class Browser {
 
     async heal() {
         await this.page.keyboard.press('1');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
+    }
+
+    async fly() {
+        await this.page.keyboard.press('2');
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
     }
 
     async buff() {
         await this.page.keyboard.press('3');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('4');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('5');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('6');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('c');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
     }
 
     randomMin() {
@@ -48,7 +54,11 @@ module.exports = class Browser {
         clearInterval(this.countdown)
         let cooldownSec = this.cooldown/1000
         this.countdown = setInterval(() => {
-            console.log(`Buffing in ${cooldownSec} sec(s)`)
+
+            if (cooldownSec <= 10) {
+                console.log(`Buffing in ${cooldownSec} sec(s)`)
+            }
+
             cooldownSec -= 1
             if (cooldownSec <= 0) {
                 this.buff()

@@ -2,13 +2,18 @@ const { app, globalShortcut } = require('electron')
 const Bot = require('./bot.js')
 
 app.whenReady().then(async () => {
-  bot = new Bot('https://universe.flyff.com/play', 20, 40)
+  bot = new Bot('https://universe.flyff.com/play', 210, 300)
   bot.play()
 
   // heal
   globalShortcut.register('Alt+1', () => {
     bot.heal()
     console.log('Healing....')
+  })
+
+  globalShortcut.register('Alt+2', () => {
+    bot.fly()
+    console.log('Flying...')
   })
 
   // buff
