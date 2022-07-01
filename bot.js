@@ -40,6 +40,12 @@ module.exports = class Browser {
         await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('6');
         await new Promise(resolve => setTimeout(resolve, this.countGap));
+        await this.page.keyboard.press('7');
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
+        await this.page.keyboard.press('8');
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
+        await this.page.keyboard.press('9');
+        await new Promise(resolve => setTimeout(resolve, this.countGap));
         await this.page.keyboard.press('c');
         await new Promise(resolve => setTimeout(resolve, this.countGap));
     }

@@ -6,18 +6,18 @@ app.whenReady().then(async () => {
   bot.play()
 
   // heal
-  globalShortcut.register('Alt+1', () => {
+  globalShortcut.register('Ctrl+Shift+1', () => {
     bot.heal()
     console.log('Healing....')
   })
 
-  globalShortcut.register('Alt+2', () => {
+  globalShortcut.register('Ctrl+Shift+2', () => {
     bot.fly()
     console.log('Flying...')
   })
 
   // buff
-  globalShortcut.register('Alt+3', () => {
+  globalShortcut.register('Ctrl+Shift+3', () => {
     bot.buff()
     console.log('Buffing...')
   })
@@ -34,11 +34,11 @@ app.whenReady().then(async () => {
   })
 
   // Check whether a shortcut is registered.
-  if (globalShortcut.isRegistered('Alt+1')) {
+  if (globalShortcut.isRegistered('Ctrl+Shift+1')) {
     console.log('Heal regitered')
   }
 
-  if (globalShortcut.isRegistered('Alt+3')) {
+  if (globalShortcut.isRegistered('Ctrl+Shift+3')) {
     console.log('Heal registered')
   }
 
