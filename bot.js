@@ -78,4 +78,12 @@ module.exports = class Browser {
         console.log(`auto buff disabled`)
         clearInterval(this.countdown)
     }
+
+    spamHeal() {
+        clearInterval(this.countdown)
+        console.log(`spam heal active`)
+        this.countdown = setInterval(async () => {
+            await this.page.keyboard.press('1');
+        }, 500);
+    }
 }

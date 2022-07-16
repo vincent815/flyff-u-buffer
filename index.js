@@ -17,7 +17,7 @@ app.whenReady().then(async () => {
   })
 
   // buff
-  globalShortcut.register('Ctrl+Shift+3', () => {
+  globalShortcut.register('Insert', () => {
     bot.buff()
     console.log('Buffing...')
   })
@@ -31,6 +31,11 @@ app.whenReady().then(async () => {
   // disable auto buff with random number
   globalShortcut.register('End', () => {
     bot.disableAutoBuff()
+  })
+
+  // disable auto buff with random number
+  globalShortcut.register('Delete', () => {
+    bot.spamHeal()
   })
 
   // Check whether a shortcut is registered.
