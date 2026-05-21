@@ -3,22 +3,36 @@
 const puppeteer = require('puppeteer');
 
 module.exports = class Browser {
+    browser
     page
     cooldown
     countdown
     countGap = 2000
-    constructor(website, min, max) {
+    constructor(website, min, max, userDataDir) {
         this.website = website;
         this.min = min;
         this.max = max;
+        this.userDataDir = userDataDir;
     }
 
     async play() {
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch({
+            headless: false,
+            userDataDir: this.userDataDir,
+        });
         const page = await browser.newPage();
         await page.goto(this.website);
 
+        this.browser = browser
         this.page = page
+    }
+
+    async close() {
+        clearInterval(this.countdown)
+
+        if (this.browser) {
+            await this.browser.close()
+        }
     }
 
     async heal() {
@@ -74,7 +88,7 @@ module.exports = class Browser {
         }, 1000)
     }
 
-    disableAutoBuff() {
+    disableAutoBuffAndHeal() {
         console.log(`auto buff disabled`)
         clearInterval(this.countdown)
     }
@@ -84,6 +98,6 @@ module.exports = class Browser {
         console.log(`spam heal active`)
         this.countdown = setInterval(async () => {
             await this.page.keyboard.press('1');
-        }, 500);
+        }, 1000);
     }
 }

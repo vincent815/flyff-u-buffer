@@ -1,9 +1,13 @@
+const path = require('path')
 const { app, globalShortcut } = require('electron')
 const Bot = require('./bot.js')
 
+let bot
+
 app.whenReady().then(async () => {
-  bot = new Bot('https://universe.flyff.com/play', 210, 300)
-  bot.play()
+  const sessionPath = path.join(app.getPath('userData'), 'browser-session')
+  bot = new Bot('https://universe.flyff.com/play', 210, 300, sessionPath)
+  await bot.play()
 
   // heal
   globalShortcut.register('Ctrl+Shift+1', () => {
@@ -30,10 +34,10 @@ app.whenReady().then(async () => {
 
   // disable auto buff with random number
   globalShortcut.register('End', () => {
-    bot.disableAutoBuff()
+    bot.disableAutoBuffAndHeal()
   })
 
-  // disable auto buff with random number
+
   globalShortcut.register('Delete', () => {
     bot.spamHeal()
   })
@@ -56,10 +60,14 @@ app.whenReady().then(async () => {
   }
 })
 
-app.on('will-quit', () => {
+app.on('will-quit', async () => {
   // Unregister a shortcut.
   // globalShortcut.unregister('CommandOrControl+1')
 
   // Unregister all shortcuts.
   globalShortcut.unregisterAll()
+
+  if (bot) {
+    await bot.close()
+  }
 })
